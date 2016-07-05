@@ -25,10 +25,10 @@ if (!process.env.USERNAME || !process.env.PASSWORD) {
 describe('Application life cycle test', function () {
     this.timeout(0);
 
-    var firefox = require('selenium-webdriver/firefox');
-    var server, browser = new firefox.Driver();
+    var chrome = require('selenium-webdriver/chrome');
+    var server, browser = new chrome.Driver();
     var TEST_TIMEOUT = 20000;
-    var LOCATION = 'owncloudtest';
+    var LOCATION = 'nextcloudtest';
     var LOCAL_FILENAME = 'sticker.png';
     var REMOTE_FILENAME = 'sticker.png';
     var CONTACT_NAME = 'Johannes';
@@ -144,7 +144,7 @@ describe('Application life cycle test', function () {
     });
 
     it('check scheduler script', function () {
-        var output = execSync('cloudron exec -i -- ls -l ' + manifest.addons.scheduler.housekeeping.command);
+        var output = execSync('cloudron exec -- ls -l ' + manifest.addons.scheduler.housekeeping.command);
         expect(output.indexOf('-rwxrwxr-x')).to.be.greaterThan(-1);
     });
 
@@ -204,7 +204,7 @@ describe('Application life cycle test', function () {
     it('can logout', logout);
 
     it('can restart app', function (done) {
-        execSync('cloudron restart');
+        execSync('cloudron restart --app ' + app.id);
         done();
     });
 
@@ -216,11 +216,11 @@ describe('Application life cycle test', function () {
     it('can api login', apiLogin);
 
     it('backup app', function () {
-        execSync('cloudron backup --app ' + app.id, { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
+        execSync('cloudron backup --app ' + app.id);
     });
 
     it('restore app', function () {
-        execSync('cloudron restore --app ' + app.id, { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
+        execSync('cloudron restore --app ' + app.id);
     });
 
     it('can login', login.bind(null, username, password));
@@ -232,7 +232,7 @@ describe('Application life cycle test', function () {
 
     it('move to different location', function () {
         browser.manage().deleteAllCookies();
-        execSync('cloudron install --location ' + LOCATION + '2', { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
+        execSync('cloudron install --app ' + app.id + ' --location ' + LOCATION + '2');
         var inspect = JSON.parse(execSync('cloudron inspect'));
         app = inspect.apps.filter(function (a) { return a.location === LOCATION + '2'; })[0];
         expect(app).to.be.an('object');
@@ -246,6 +246,6 @@ describe('Application life cycle test', function () {
     it('can api login', apiLogin);
 
     it('uninstall app', function () {
-        execSync('cloudron uninstall --app ' + app.id, { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
+        execSync('cloudron uninstall --app ' + app.id);
     });
 });
