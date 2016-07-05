@@ -1,0 +1,41 @@
+{
+  "id": "com.nextcloud.cloudronapp",
+  "title": "nextcloud",
+  "author": "nextcloud developers",
+  "contactEmail": "support@cloudron.io",
+  "description": "file://DESCRIPTION.md",
+  "tagline": "Host and share your data",
+  "tags": [
+    "sync",
+    "file sharing",
+    "files",
+    "gallery",
+    "dropbox"
+  ],
+  "targetBoxVersion": "0.4.0",
+  "version": "0.1.0",
+  "healthCheckPath": "/",
+  "httpPort": 8000,
+  "manifestVersion": 1,
+  "website": "https://www.nextcloud.com",
+  "icon": "icon.png",
+  "changelog": "file://CHANGELOG",
+  "addons": {
+    "postgresql": {},
+    "sendmail": {},
+    "ldap": {},
+    "localstorage": {},
+    "scheduler": {
+      "housekeeping": {
+        "schedule": "*/5 * * * *",
+        "command": "/app/cron.sh"
+      }
+    }
+  },
+  "mediaLinks": [
+    "https://i.imgur.com/bgxq6Rh.jpg",
+    "https://i.imgur.com/FANiU0k.jpg",
+    "https://i.imgur.com/JvytzM4.jpg",
+    "https://i.imgur.com/nnjJbM9.jpg"
+  ]
+}
