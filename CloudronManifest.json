@@ -1,7 +1,7 @@
 {
   "id": "com.nextcloud.cloudronapp",
-  "title": "nextcloud",
-  "author": "nextcloud developers",
+  "title": "Nextcloud",
+  "author": "Nextcloud developers",
   "contactEmail": "support@cloudron.io",
   "description": "file://DESCRIPTION.md",
   "tagline": "Host and share your data",

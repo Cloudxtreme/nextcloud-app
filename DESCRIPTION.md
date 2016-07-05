@@ -1,8 +1,8 @@
 ### Accounts
 
-This app integrates with Cloudron authentication. Cloudron users can login and use nextcloud.
+This app integrates with Cloudron authentication. Cloudron users can login and use Nextcloud.
 
-However, _admin_ status of Cloudron user is not carried over to nextcloud. For this reason,
+However, _admin_ status of Cloudron user is not carried over to Nextcloud. For this reason,
 this app comes with an pre-setup admin user. This admin user can grant admin previleges to
 other users.
 
@@ -14,7 +14,7 @@ other users.
 
 ### Overview
 
-nextcloud is a file sync and share server. It provides access to
+Nextcloud is a file sync and share server. It provides access to
 your data through a web interface, sync clients or WebDAV while providing a
 platform to view, sync and share across devices easily - all under your control.
 

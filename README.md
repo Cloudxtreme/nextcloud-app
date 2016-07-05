@@ -1,6 +1,6 @@
-# nextcloud Cloudron App
+# Nextcloud Cloudron App
 
-This repository contains the Cloudron app package source for [nextcloud](https://nextcloud.com).
+This repository contains the Cloudron app package source for [Nextcloud](https://nextcloud.com).
 
 ## Installation
 
