@@ -34,9 +34,10 @@
     }
   },
   "mediaLinks": [
-    "https://i.imgur.com/bgxq6Rh.jpg",
-    "https://i.imgur.com/FANiU0k.jpg",
-    "https://i.imgur.com/JvytzM4.jpg",
-    "https://i.imgur.com/nnjJbM9.jpg"
+    "https://raw.githubusercontent.com/cloudron-io/nextcloud-app/master/medialinks/screenshot-1.png",
+    "https://raw.githubusercontent.com/cloudron-io/nextcloud-app/master/medialinks/screenshot-2.png",
+    "https://raw.githubusercontent.com/cloudron-io/nextcloud-app/master/medialinks/screenshot-3.png",
+    "https://raw.githubusercontent.com/cloudron-io/nextcloud-app/master/medialinks/screenshot-4.png",
+    "https://raw.githubusercontent.com/cloudron-io/nextcloud-app/master/medialinks/screenshot-5.png"
   ]
 }
