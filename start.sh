@@ -2,19 +2,6 @@
 
 set -eux
 
-: ${POSTGRESQL_URL:=}
-if [[ -z "${POSTGRESQL_URL}" ]]; then
-    echo "POSTGRESQL_URL is empty"
-    exit 1
-fi
-
-proto="$(echo "${POSTGRESQL_URL}" | sed -e's,^\(.*://\).*,\1,g')"
-url="$(echo ${POSTGRESQL_URL/$proto/})"
-username="$(echo ${url} | cut -d: -f1)"
-password=$(echo ${url/$username:/} | cut -d@ -f1)
-host="$(echo ${url/$username:$password@/} | cut -d/ -f1)"
-db="$(echo ${url} | grep / | cut -d/ -f2-)"
-
 export mail_from_sub=$(echo $MAIL_FROM | cut -d \@ -f 1)
 export mail_domain_sub=$(echo $MAIL_FROM | cut -d \@ -f 2)
 
@@ -55,26 +42,6 @@ rewrite_config() {
 EOF
 }
 
-create_autoconfig() {
-    # creating this file makes nextcloud skip configuration step on first login
-    # http://doc.nextcloud.org/server/6.0/admin_manual/configuration/configuration_automation.html
-    cat > /app/data/config/autoconfig.php <<EOF
-<?php
-    \$AUTOCONFIG = array(
-        "dbtype"        => "pgsql",
-        "dbname"        => "${db}",
-        "dbuser"        => "${username}",
-        "dbpass"        => "${password}",
-        "dbhost"        => "${host}",
-        "dbtableprefix" => "",
-        "adminlogin"    => "admin",
-        "adminpass"     => "changeme",
-        "directory"     => "/app/data",
-        "updatechecker" => false
-    );
-EOF
-}
-
 setupAndConfigure() {
     while [[ ! -f "/run/apache2/apache2.pid" ]]; do
         echo "Waiting for apache2 to start"
@@ -86,10 +53,8 @@ setupAndConfigure() {
         sudo -u www-data bash -c 'mkdir -p /app/data/config'
         sudo -u www-data bash -c 'cp -rf /app/apps_template /app/data/apps'
 
-        create_autoconfig
-
         echo "Installing database"
-        curl http://localhost:8000
+        sudo -u www-data php /app/code/occ  maintenance:install --data-dir "/app/data" --database "pgsql" --database-host "${POSTGRESQL_HOST}:${POSTGRESQL_PORT}" --database-name "${POSTGRESQL_DATABASE}"  --database-user "${POSTGRESQL_USERNAME}" --database-pass "${POSTGRESQL_PASSWORD}" --admin-user "admin" --admin-pass "changeme"
     else
         NEW_APPS="/app/apps_template"
         OLD_APPS="/app/data/apps"

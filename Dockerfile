@@ -7,7 +7,11 @@ RUN mkdir -p /app/code
 WORKDIR /app/code
 
 # get nextcloud source
-RUN curl -L https://download.nextcloud.com/server/releases/nextcloud-9.0.52.zip | tar -xj --strip-components 1 -f -
+RUN cd /tmp && \
+    wget https://download.nextcloud.com/server/releases/nextcloud-9.0.52.zip && \
+    unzip nextcloud-9.0.52.zip && \
+    mv /tmp/nextcloud/* /app/code/ && \
+    rm -rf /tmp/nextcloud/ nextcloud-9.0.52.zip
 
 # create config folder link to make the config survive updates
 RUN rm -rf /app/code/config && \
