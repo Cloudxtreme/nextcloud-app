@@ -14,7 +14,7 @@
   ],
   "developmentMode": false,
   "targetBoxVersion": "0.4.0",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "healthCheckPath": "/",
   "httpPort": 8000,
   "manifestVersion": 1,
